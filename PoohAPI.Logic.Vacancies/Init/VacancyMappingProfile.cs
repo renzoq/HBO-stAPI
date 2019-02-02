@@ -34,6 +34,7 @@ namespace PoohAPI.Logic.Vacancies.Init
                 .ForMember(d => d.Description, o => o.MapFrom(s => s.vacature_tekst))
                 .ForMember(d => d.ClosingDate, o => o.MapFrom(s => s.vacature_datum_verlopen))
                 .ForMember(d => d.CreationDate, o => o.MapFrom(s => s.vacature_datum_plaatsing))
+                .ForMember(d => d.Active, o => o.MapFrom(s => s.vacature_actief))
                 .ForMember(d => d.Title, o => o.MapFrom(s => s.vacature_titel))
                 .ForMember(d => d.CompanyId, o => o.MapFrom(s => s.vacature_bedrijf_id))
                 .ForMember(d => d.Language, o => o.MapFrom(s => s.talen_naam))

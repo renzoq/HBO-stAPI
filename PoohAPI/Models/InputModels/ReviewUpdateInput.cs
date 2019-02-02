@@ -22,6 +22,7 @@ namespace PoohAPI.Models.InputModels
         [Required]
         public int VerifiedReview { get; set; }
         [Required]
-        public int VerifiedBy { get; set; }        
+        public int VerifiedBy { get; set; }    
+        public bool FromElbho { get; set; }
     }
 }

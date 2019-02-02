@@ -18,6 +18,7 @@ namespace PoohAPI.Infrastructure.ReviewDB.Models
         public DateTime review_datum { get; set; }
         public int review_status { get; set; }
         public int review_status_bevestigd_door { get; set; }
+        public bool review_from_elbho { get; set; }
         //public string blob;
     }
 }

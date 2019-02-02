@@ -79,6 +79,7 @@ review_schema = {
 					'verifiedBy' : {'type' : 'integer'},
 					'verificationDate' : {'type' : 'string'},
 					'locked' : {'type' : 'boolean'}
+					'fromElbho' : {'type' : 'boolean'}
                 }
 
 major_schema = {
@@ -124,6 +125,7 @@ vacancy_schema = {
                     'educationalAttainment' : {'type' : 'string'},
                     'internshipType' : {'type' : 'string'},
                     'location' : {'type' : 'dict', 'schema' : location_schema},
+					'active' : {'type' : 'integer'},
                     }
 
 country_schema = {

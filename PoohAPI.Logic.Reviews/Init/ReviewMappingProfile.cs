@@ -21,6 +21,7 @@ namespace PoohAPI.Logic.Reviews.Init
                 .ForMember(d => d.CreationDate, o => o.MapFrom(s => s.review_datum))
                 .ForMember(d => d.VerifiedReview, o => o.MapFrom(s => s.review_status))
                 .ForMember(d => d.VerifiedBy, o => o.MapFrom(s => s.review_status_bevestigd_door))
+                .ForMember(d => d.FromElbho, o => o.MapFrom(s => s.review_from_elbho))
                 //.ForMember(d => d.EmploymentContractPDF, o => o.MapFrom(s => s.blob))
                 .ReverseMap();
 

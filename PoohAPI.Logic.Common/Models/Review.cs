@@ -18,6 +18,7 @@ namespace PoohAPI.Logic.Common.Models
         public DateTime CreationDate { get; set; }
         public int VerifiedReview { get; set; }
         public int VerifiedBy { get; set; }
+        public bool FromElbho { get; set; }
         //public string EmploymentContractPDF { get; set; }
         
         public DateTime VerificationDate { get; set; }

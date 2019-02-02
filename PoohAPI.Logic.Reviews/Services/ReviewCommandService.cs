@@ -33,7 +33,7 @@ namespace PoohAPI.Logic.Reviews.Services
             _reviewRepository.DeleteReview(query, parameters);
         }
 
-        public Review UpdateReview(int reviewId, int companyId, int userId, int stars, string writtenReview, int anonymous, DateTime creationDate, int verifiedReview, int verifiedBy)
+        public Review UpdateReview(int reviewId, int companyId, int userId, int stars, string writtenReview, int anonymous, DateTime creationDate, int verifiedReview, int verifiedBy, bool fromElbho)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -46,12 +46,14 @@ namespace PoohAPI.Logic.Reviews.Services
             parameters.Add("@creationDate", creationDate);
             parameters.Add("@verifiedReview", verifiedReview);
             parameters.Add("@verifiedBy", verifiedBy);
+            parameters.Add("@fromElbho", fromElbho);
 
             string query = "UPDATE reg_reviews SET review_id = @id" +
                 ", review_bedrijf_id = @companyId, review_student_id = @userId" +
                 ", review_sterren = @stars, review_geschreven = @writtenReview" +
                 ", review_anoniem = @anonymous, review_datum = @creationDate" +
                 ", review_status = @verifiedReview, review_status_bevestigd_door = @verifiedBy" +
+                ", review_from_elbho = @fromElbho" +
                 " WHERE review_id = @id;";
 
             _reviewRepository.UpdateReview(query, parameters);
@@ -59,7 +61,7 @@ namespace PoohAPI.Logic.Reviews.Services
             return _reviewReadService.GetReviewById(reviewId);
         }
 
-        public Review PostReview(int companyId, int userId, int stars, string writtenReview, int anonymous)
+        public Review PostReview(int companyId, int userId, int stars, string writtenReview, int anonymous, bool from_elbho)
         { 
             Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -71,11 +73,12 @@ namespace PoohAPI.Logic.Reviews.Services
             parameters.Add("@datum", DateTime.Now);
             parameters.Add("@status", 0);
             parameters.Add("@bevestigdDoor", 0);
+            parameters.Add("@elbho", from_elbho);
 
             string query = "INSERT INTO reg_reviews (review_bedrijf_id, review_student_id" +
                 ", review_sterren, review_geschreven, review_anoniem, review_datum" +
-                ", review_status, review_status_bevestigd_door) " +
-                "VALUES (@bedrijfId, @studentId, @sterren, @geschreven, @anoniem, @datum, @status, @bevestigdDoor);" +
+                ", review_status, review_status_bevestigd_door, review_from_elbho) " +
+                "VALUES (@bedrijfId, @studentId, @sterren, @geschreven, @anoniem, @datum, @status, @bevestigdDoor, @elbho);" +
                 "SELECT LAST_INSERT_ID()";
 
             var createdReviewId = _reviewRepository.PostReview(query, parameters);

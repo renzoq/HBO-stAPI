@@ -31,7 +31,7 @@ namespace PoohAPI.Logic.Vacancies.Services
             this.locationHelper = new LocationHelper();
         }
 
-        public IEnumerable<Vacancy> GetListVacancies(int maxcount = 5, int offset = 0, string additionallocationsearchterms = null, int? educationid = null, int? educationalattainmentid = null, IntershipType? internshiptype = null, int? languageid = null, string cityname = null, string countryname = null, int? locationrange = null)
+        public IEnumerable<Vacancy> GetListVacancies(int maxcount = 5, int offset = 0, string additionallocationsearchterms = null, int? educationid = null, int? educationalattainmentid = null, IntershipType? internshiptype = null, int? languageid = null, string cityname = null, string countryname = null, int? locationrange = null, int? active = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -49,6 +49,9 @@ namespace PoohAPI.Logic.Vacancies.Services
 
             //Adding language filter to the query
             this.AddLanguageFilter(parameters, languageid);
+
+            //Adding active filter
+            this.AddActiveFilter(parameters, active);
 
             //building the query
             string query = this.queryBuilder.BuildQuery();
@@ -147,9 +150,6 @@ namespace PoohAPI.Logic.Vacancies.Services
             //Join for the internshiptype
             this.queryBuilder.AddJoinLine("INNER JOIN reg_stagesoort s ON v.vacature_stagesoort = s.stage_id");
 
-            //Where clause to only get active vacancies
-            this.queryBuilder.AddWhere("v.vacature_actief = 1");
-
             //Group by vacancyid needed for group concat to work
             this.queryBuilder.AddGroupBy("v.vacature_id");
         }
@@ -201,6 +201,15 @@ namespace PoohAPI.Logic.Vacancies.Services
             {
                 this.queryBuilder.AddWhere("t.talen_id = @languageid");
                 parameters.Add("@languageid", languageid);
+            }
+        }
+
+        private void AddActiveFilter(Dictionary<string, object> parameters, int? active = null)
+        {
+            if (active != null)
+            {
+                this.queryBuilder.AddWhere("v.vacature_actief = @active");
+                parameters.Add("@active", active);
             }
         }
     }

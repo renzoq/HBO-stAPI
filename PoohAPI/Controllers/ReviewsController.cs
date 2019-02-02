@@ -80,7 +80,7 @@ namespace PoohAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                return Ok(_reviewCommandService.PostReview(reviewData.CompanyId, CustomAuthorizationHelper.GetCurrentUserId(User), reviewData.Stars, reviewData.WrittenReview, reviewData.Anonymous));
+                return Ok(_reviewCommandService.PostReview(reviewData.CompanyId, CustomAuthorizationHelper.GetCurrentUserId(User), reviewData.Stars, reviewData.WrittenReview, reviewData.Anonymous, reviewData.FromElbho));
             }
             else
             {
@@ -123,7 +123,7 @@ namespace PoohAPI.Controllers
 
                 else return Ok(_reviewCommandService.UpdateReview(id, reviewData.CompanyId, review.UserId, reviewData.Stars,
                         reviewData.WrittenReview, reviewData.Anonymous, reviewData.CreationDate,
-                        reviewData.VerifiedReview, reviewData.VerifiedBy));
+                        reviewData.VerifiedReview, reviewData.VerifiedBy, reviewData.FromElbho));
             }
             else
             {

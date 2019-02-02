@@ -10,8 +10,8 @@ namespace PoohAPI.Logic.Common.Interfaces
     public interface IReviewCommandService
     {
         Review UpdateReview(int reviewId, int companyId, int userId, int stars, string writtenReview, int anonymous,
-        DateTime creationDate, int verifiedReview, int verifiedBy);
+        DateTime creationDate, int verifiedReview, int verifiedBy, bool fromElbho);
         void DeleteReview(int id);
-        Review PostReview(int companyId, int userId, int stars, string writtenReview, int anonymous);
+        Review PostReview(int companyId, int userId, int stars, string writtenReview, int anonymous, bool fromElbho);
     }
 }
